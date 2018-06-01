@@ -2,7 +2,9 @@
 ### ZendFramework template
 # Composer files
 composer.phar
+composer.lock
 vendor/
+.idea
 
 # Local configs
 config/autoload/*.local.php
