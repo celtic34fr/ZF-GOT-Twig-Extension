@@ -1,5 +1,7 @@
 <?php
 
+namespace ZFGOTTwigExtension;
+
 return [
 
     'view_manager' => [
