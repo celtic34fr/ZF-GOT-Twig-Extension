@@ -1,0 +1,1 @@
+répertoire de stockage des classes objets étendus type OSContainer du module
