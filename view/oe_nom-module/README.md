@@ -1,0 +1,1 @@
+répertoire de stockage des modèles (template) spécifiques au module

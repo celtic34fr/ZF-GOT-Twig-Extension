@@ -1,0 +1,1 @@
+répertoire de stockage des fichiers JavaScript utiles pour le fonctionnement du module
