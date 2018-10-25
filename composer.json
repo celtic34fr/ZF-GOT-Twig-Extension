@@ -16,17 +16,16 @@
       "role":      "Project Leader"
     }
   ],
-  "homepage": "http://girthub.com/celtic34fr/ZF-GOT-Twig-Extension",
+  "homepage": "http://github.com/celtic34fr/ZF-GOT-Twig-Extension",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
     "php": "^5.6 || ^7.0",
-    "zendframework/zend-component-installer": "^1.0 || ^0.7 || ^1.0.0-dev@dev",
-    "zendframework/zend-session": "2.8.5"
+    "celtic34fr/ZF-GraphicObjectTemplating-Twig": "@dev"
   },
   "autoload": {
     "psr-4": {
-      "ZF-GOT-Twig-Extension\\": "src/"
+      "GotTemplateExtension\\": "src/"
     }
   },
   "autoload-dev": {

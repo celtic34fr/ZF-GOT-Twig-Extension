@@ -1,6 +1,6 @@
 <?php
 
-namespace ZFGOTTwigExtension;
+namespace GotTemplateExtension;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
