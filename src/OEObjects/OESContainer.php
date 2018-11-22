@@ -18,16 +18,16 @@ class OESContainer extends OEObject
 
         $properties = $this->getProperties();
 
-        $oeproperties = include __DIR__ . '/../../../view/zf3-graphic-object-templating/oeobjects/oescontainer/oescontainer.config.php';
+        $oeproperties = include __DIR__ . '/../../view/zf3-graphic-object-templating/oeobjects/oescontainer/oescontainer.config.php';
         foreach ($oeproperties as $oekey => $oeproperty) {
             $properties[$oekey] = $oeproperty;
         }
         /** @var OSContainer $objetCore */
-        $objetCore = new $this->_tExtends('');
+        $objetCore = new $this->_tExtends($id, $oopath);
         $corProperties = $objetCore->getProperties();
         foreach ($corProperties as $corKey => $corProperty) {
             if (!array_key_exists($corKey, $properties)) {
-                $properties[$corKey] = $corProperties;
+                $properties[$corKey] = $corProperty;
             }
         }
         $objetCore->setId($id);
@@ -40,8 +40,29 @@ class OESContainer extends OEObject
 
     public function __call($funcName, $tArgs)
     {
+        if (substr($funcName, 0, 3) !=  'get') {
+            $savProperties  = $this->_tExtendIntances->getProperties();
+        }
         if(method_exists($this->_tExtendIntances, $funcName))
-        { return call_user_func_array(array($this->_tExtendIntances, $funcName), $tArgs); }
+        {
+            $rc = call_user_func_array(array($this->_tExtendIntances, $funcName), $tArgs);
+            if ($rc !== false) {
+                if (substr($funcName, 0, 3) !=  'get') {
+                    $properties     = $this->getProperties();
+                    $curProperties  = $this->_tExtendIntances->getProperties();
+                    foreach ($curProperties as $key => $curProperty) {
+                        if ($curProperty != $savProperties[$key]) {
+                            $properties[$key] = $curProperty;
+                        }
+                    }
+                    $this->setProperties($properties);
+                    $this->saveProperties();
+                    return $this;
+                } else {
+                    return $rc;
+                }
+            }
+        }
         throw new \Exception("The $funcName method doesn't exist");
     }
 
