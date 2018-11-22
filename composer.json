@@ -1,5 +1,5 @@
 {
-  "name": "celtic34fr/ZF-GOT-Twig-Extension",
+  "name": "celtic34fr/zf-got-twig-extension",
   "description": "template of module extension for GraphicObjectTemplating",
   "type": "project",
   "license": "BSD-3-Clause",
@@ -16,12 +16,12 @@
       "role":      "Project Leader"
     }
   ],
-  "homepage": "http://github.com/celtic34fr/ZF-GOT-Twig-Extension",
+  "homepage": "http://github.com/celtic34fr/zf-got-twig-extension",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
     "php": "^5.6 || ^7.0",
-    "celtic34fr/ZF-GraphicObjectTemplating-Twig": "@dev"
+    "celtic34fr/zf-graphic-object-templating-twig": "@dev"
   },
   "autoload": {
     "psr-4": {
