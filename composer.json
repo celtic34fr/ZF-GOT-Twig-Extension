@@ -20,7 +20,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": "^5.6 || ^7.0",
+    "php": "^7.0",
     "celtic34fr/zf-graphic-object-templating-twig": "@dev"
   },
   "autoload": {
