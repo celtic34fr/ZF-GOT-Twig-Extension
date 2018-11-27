@@ -3,7 +3,7 @@
 return [
 
     'resources' => [
-        'prefix' => 'gotextension/[nomModule]/oeobjects/[typeObj]/[object]/',
+        'prefix' => 'gotextension/[nameOfTheme]/oeobjects/[typeObj]/[object]/',
         'css'    => [],
         'js'     => [],
     ],
