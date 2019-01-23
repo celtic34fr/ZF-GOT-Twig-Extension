@@ -37,10 +37,17 @@ class OEDContained extends OEObject
     }
 
 
+    /**
+     * @param $funcName
+     * @param $tArgs
+     * @return $this
+     * @throws \Exception
+     */
     public function __call($funcName, $tArgs)
     {
         if(method_exists($this->_tExtendIntances, $funcName))
         {
+            $savProperties  = [];
             if (substr($funcName, 0, 3) !=  'get') {
                 $savProperties  = $this->_tExtendIntances->getProperties();
             }
