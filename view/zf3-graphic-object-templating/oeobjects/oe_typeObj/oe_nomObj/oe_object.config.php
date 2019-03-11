@@ -1,10 +1,10 @@
 <?php
 
 return [
-
-    'resources' => [
-        'prefix' => 'gotextension/[nameOfTheme]/oeobjects/[typeObj]/[object]/',
-        'css'    => [],
-        'js'     => [],
+    'dispatchEvents'    => false,
+    'resources'         => [
+        'prefix'            => '[nameOfThemeOrExtension]/',
+        'css'               => [],
+        'js'                => [],
     ],
 ];
