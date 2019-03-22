@@ -11,6 +11,7 @@ class OEObject extends OObject
      * @param $id       identifiant de l'objet
      * @param $oeopath  chemin total du fichier de configuration de l'objet étendu
      * @param $oopath   chemin partiel de l'objet core de référence
+     * @throws \Exception
      */
     public function __construct($id, $oeopath, $oopath)
     {
