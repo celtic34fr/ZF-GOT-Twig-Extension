@@ -30,6 +30,27 @@ class OEObject extends OObject
                     $properties[$objKey] = $objProperty;
                 }
 
+                /** gestyion des resources de l'objet étendu */
+                $pathRscs   = substr($oeopath, 0, strlen($oeopath) - 10).'rscs.php';
+                if (is_file($pathRscs)) {
+                    $rscsObj = include $pathRscs;
+                    if ($rscsObj) {
+                        $sessionObj     = OObject::validateSession();
+                        $rscsSession    = $sessionObj->resources ?? [];
+                        $prefix         = 'gotextension/' . $rscsObj['prefix'] . 'oeobjects/';
+                        unset($rscsObj['prefix']);
+                        foreach ($rscsObj as $type => $filesInfo) {
+                            if (!array_key_exists($type, $rscsSession)) {
+                                $rscsSession[$type] = [];
+                            }
+                            foreach ($filesInfo as $name => $path) {
+                                $rscsSession[$type][$name] = $prefix . $properties['typeObj'] . '/' . $properties['object'] . '/' . $path;
+                            }
+                        }
+                        $sessionObj->resources = $rscsSession;
+                    }
+                }
+
                 $templateName = 'zf3-graphic-object-templating/oeobjects/' . $objProperties['typeObj'];
                 $templateName .= '/' . $objProperties['object'] . '/' . $objProperties['template'];
                 $properties['template'] = $templateName;
@@ -38,6 +59,7 @@ class OEObject extends OObject
                 return $this;
             }
         }
+
         return false;
     }
 }
