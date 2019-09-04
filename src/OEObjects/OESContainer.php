@@ -1,9 +1,8 @@
 <?php
 
-
 namespace GotTemplateExtension\OEObjects;
 
-use GotTemplateExtension\OEObjects\OEObject;
+use Exception;
 use GraphicObjectTemplating\OObjects\OObject;
 use GraphicObjectTemplating\OObjects\OSContainer;
 
@@ -12,16 +11,19 @@ class OESContainer extends OEObject
     private $_tExtends        = OSContainer::class;
     private $_tExtendIntances = "";
 
-    public function __construct($id, $oeopath, $oopath)
+    /**
+     * OESContainer constructor.
+     * @param string $id
+     * @param array $oeopath
+     * @param array $oopath
+     * @throws Exception
+     */
+    public function __construct(string $id, array $oeopath, array $oopath)
     {
+        $oeopath[]  = __DIR__ . '/../../view/zf3-graphic-object-templating/oeobjects/oescontainer/oescontainer.config.php';
         parent::__construct($id, $oeopath, $oopath);
-
         $properties = $this->getProperties();
 
-        $oeproperties = include __DIR__ . '/../../view/zf3-graphic-object-templating/oeobjects/oescontainer/oescontainer.config.php';
-        foreach ($oeproperties as $oekey => $oeproperty) {
-            $properties[$oekey] = $oeproperty;
-        }
         /** @var OSContainer $objetCore */
         $objetCore = new $this->_tExtends($id, $oopath);
         $corProperties = $objetCore->getProperties();
@@ -38,6 +40,12 @@ class OESContainer extends OEObject
         return $this;
     }
 
+    /**
+     * @param $funcName
+     * @param $tArgs
+     * @return $this|mixed
+     * @throws Exception
+     */
     public function __call($funcName, $tArgs)
     {
         if (substr($funcName, 0, 3) !=  'get') {
@@ -63,14 +71,20 @@ class OESContainer extends OEObject
                 }
             }
         }
-        throw new \Exception("The $funcName method doesn't exist");
+        throw new Exception("The $funcName method doesn't exist");
     }
 
+    /**
+     * @param $nameChild
+     * @return bool|mixed
+     * @throws Exception
+     */
     public function __get($nameChild) {
+        $sessionObjects = self::validateSession();
         $properties = $this->getProperties();
         if (!empty($properties['children'])) {
             foreach ($properties['children'] as $idChild => $child) {
-                $obj = OObject::buildObject($idChild);
+                $obj = OObject::buildObject($idChild, $sessionObjects);
                 $name = $obj->getName();
                 if ($name == $nameChild) return $obj;
             }
@@ -78,6 +92,10 @@ class OESContainer extends OEObject
         return false;
     }
 
+    /**
+     * @param OObject $object
+     * @return $this
+     */
     public function setTExtendInstances(OObject $object)
     {
         $this->_tExtendIntances = $object;
